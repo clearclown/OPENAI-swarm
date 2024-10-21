@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - .:/app  # ホスト側のディレクトリをコンテナの/appにマウント
+    command: bash --reload
+    ports:
+      - "8000:8000"  # 必要に応じてポートフォワーディングを追加
