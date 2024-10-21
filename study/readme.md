@@ -7,5 +7,5 @@ docker build -t swarm-study-image .
 ```
 
 ```sh
-docker run -it --name swarm-study-container swarm-study-image
+docker run -it --name swarm-study-container swarm-study-image bash
 ```
