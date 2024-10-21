@@ -1,9 +1,13 @@
+version: "3.9"
 services:
-  app:
-    build:
-      context: .
-    volumes:
-      - .:/app  # ホスト側のディレクトリをコンテナの/appにマウント
-    command: bash --reload
+  jupyter:
+    container_name: my-jupyter
+    build: .
     ports:
-      - "8000:8000"  # 必要に応じてポートフォワーディングを追加
+      - 8888:8888
+      - 8001:8001  # LangServeで使用するポート
+      - 8003:8003
+    volumes:
+      - ${PWD}:/home/jovyan/work
+    env_file:
+      - .env
