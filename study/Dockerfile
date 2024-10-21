@@ -4,16 +4,6 @@ FROM jupyter/datascience-notebook:latest
 # 作業ディレクトリを設定
 WORKDIR /home/jovyan/work
 
-# 必要なパッケージをインストール
-RUN apt update && apt -y upgrade && apt -y install \
-  sudo \
-  curl \
-  git \
-  vim \
-  nano \
-  build-essential \
-  libpq-dev
-
 # requirements.txt をコンテナにコピー
 COPY requirements.txt .
 COPY .env .
