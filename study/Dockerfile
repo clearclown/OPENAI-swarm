@@ -1,10 +1,8 @@
-# Dockerfile
-
-# ベースイメージとしてpython:3.11-slimを使用
-FROM python:3.11-slim
+# ベースイメージを指定
+FROM jupyter/datascience-notebook:latest
 
 # 作業ディレクトリを設定
-WORKDIR /app
+WORKDIR /home/jovyan/work
 
 # 必要なパッケージをインストール
 RUN apt update && apt -y upgrade && apt -y install \
@@ -16,11 +14,17 @@ RUN apt update && apt -y upgrade && apt -y install \
   build-essential \
   libpq-dev
 
-# ソースコードをコピー
+# requirements.txt をコンテナにコピー
+COPY requirements.txt .
+COPY .env .
+
 COPY . .
 
-# pipとpoetryをインストール
-RUN pip install --upgrade pip && \
-  pip install --no-cache-dir -r requirements.txt
+# Python パッケージをインストール
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["bash"]
+# 環境変数を設定
+ENV JUPYTER_ENABLE_LAB yes
+
+# Jupyter Notebook を起動
+CMD ["start-notebook.sh"]
