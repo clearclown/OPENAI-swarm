@@ -13,6 +13,8 @@ COPY . .
 # Python パッケージをインストール
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN pip install git+https://github.com/openai/swarm.git
+
 # 環境変数を設定
 ENV JUPYTER_ENABLE_LAB yes
 
